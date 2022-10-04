@@ -9,9 +9,9 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>
     </head>
-    <body>
+    <body class="">
         <?php
-        // put your code here
+        // put your code 
         ?>
     </body>
 </html>
