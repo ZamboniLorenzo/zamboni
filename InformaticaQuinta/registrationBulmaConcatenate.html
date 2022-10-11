@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    </head>
+    <body style="background-color:white;">
+
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                        <form action="#" class="box" method="get" enctype="multipart/form-data" name="registration">
+
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="city">
+                                    <input type="text" id="email" name="email" placeholder="nome.cognome" pattern="[a-z]{3,20}.[a-z]{3,20}[0-9]*" size="30" class="input" required>
+                                    <input type="text" id="dominio" name="dominio" value="@buonarroti.tn.it" size="30" readonly="">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <button class="button is-success" onclick="emailCompleta()">
+                                    Login
+                                </button>
+                                <button onclick="concatenate(email + dominio)">
+                                    Email completa
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function emailCompleta() {
+                
+                param.set('email', email.value + dominio.value);
+            }
+
+            function register() {
+                if (validateDate() && validatePassword())
+                    alert("Registrazione avvenuta con successo");
+            }
+            function validatePassword() {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+                var regularExpression = /^[a-zA-Z0-9!@#$%^&*]{8,30}$/;
+                var check = true;
+                if (password.length < 8) {
+                    password.setCustomValidity("La password deve essere lunga almeno 8 caratteri");
+                    return false;
+                }
+                if (!regularExpression.test(password)) {
+                    password.setCustomValidity("La password deve contenere almeno un carattero minuscolo, uno maiuscolo e un numero");
+                    return false;
+                }
+                if (password !== confirmPassword) {
+                    password.setCustomValidity("La password non corrisponde");
+                    return false;
+                }
+
+                return check;
+            }
+
+            function concatenate() {
+                var email = document.getElementById("email").value;
+                var dominio = document.getElementById("dominio").value;
+                var emailComplete = email + dominio;
+                alert(emailComplete);
+            }
+        </script>
+    </body>
+</html>
+
+<!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
+<!--
+ function Validate() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            if (password !== confirmPassword) {
+                alert("La password non corrisponde");
+            }
+            alert("Registraziona avvenuta con successo!");
+        }
+-->
