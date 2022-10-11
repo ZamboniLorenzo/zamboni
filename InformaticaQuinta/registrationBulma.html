@@ -11,10 +11,11 @@
                 <div class="columns is-centered">
                     <div class="column is-5-tablet is-4-desktop is-3-widescreen">
                         <form action="#" class="box" method="post" enctype="multipart/form-data" name="registration">
+                            
                             <div class="field">
                                 <label class="label">Email</label>
                                 <div class="city">
-                                    <input type="email" id="email" placeholder="nome.cognome@buonarroti.tn.it" pattern=".+@buonarroti\.tn\.it" size="30" class="input" required>
+                                    <input type="email" id="email" placeholder="nome.cognome@buonarroti.tn.it" pattern="[a-z0-9]*(?=.)[a-z0-9]*+@buonarroti\.tn\.it" size="30" class="input" required>
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-envelope"></i>
                                     </span>
@@ -24,7 +25,7 @@
                             <div class="field">
                                 <label class="label">Password</label>
                                 <div class="city">
-                                    <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="********" title="La password deve essere lunga almeno 8 caratteri e contenere: una lettera minuscola, una maiuscola e un numero" class="input" required>
+                                    <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" placeholder="********" title="La password deve essere lunga almeno 8 caratteri e contenere: una lettera minuscola, una maiuscola e un numero" class="input" required>
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-lock"></i>
                                     </span>
@@ -64,7 +65,7 @@
                             <div class="field">
                                 <label class="label">Codice fiscale</label>
                                 <div class="city">
-                                    <input type="text" id="codiceFiscale" placeholder="Data di nascita" size="30" pattern="^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$" class="input" required>
+                                    <input type="text" id="codiceFiscale" placeholder="Codice fiscale" size="30" pattern="^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$" class="input" required>
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-envelope"></i>
                                     </span>
@@ -74,7 +75,7 @@
                             <div class="field">
                                 <label class="label">Partita IVA</label>
                                 <div class="city">
-                                    <input type="text" id="partitaIVA" placeholder="Data di nascita" pattern="/^[0-9]{11}$/" size="30" class="input">
+                                    <input type="text" id="partitaIVA" placeholder="Partita IVA" pattern="/^[0-9]{11}$/" size="30" class="input">
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-envelope"></i>
                                     </span>
@@ -100,7 +101,7 @@
                                 </label>
                             </div>
                             <div class="field">
-                                <button class="button is-success" onclick="">
+                                <button class="button is-success" onclick="validatePassword()">
                                     Login
                                 </button>
                             </div>
@@ -122,7 +123,9 @@
             var password = document.getElementById("password").value;
             var confirmPassword = document.getElementById("confirmPassword").value;
             var regularExpression = /^[a-zA-Z0-9!@#$%^&*]{8,30}$/;
+            var check = true;
             if (password.length < 8) {
+                alert("La password deve essere lunga almeno 8 caratteri");
                 return false;
             }
             if (!regularExpression.test(password)) {
@@ -133,10 +136,12 @@
                 alert("La password non corrisponde");
                 return false;
             }
+            
+            return check;
         }
 
         function validateDate() {
-            var dateOfBirth = document.getElementById("dataNascita").value
+            var dateOfBirth = document.getElementById("dataNascita").value;
         }
     </script>
     <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
