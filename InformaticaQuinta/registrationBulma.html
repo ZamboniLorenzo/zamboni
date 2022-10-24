@@ -2,20 +2,83 @@
 <html>
 
     <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../bulma/css/bulma.min.css">
+
     </head>
     <body style="background-color:white;">
 
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="https://bulma.io">
+                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                        Home
+                    </a>
+
+                    <a class="navbar-item">
+                        Documentation
+                    </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            More
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                About
+                            </a>
+                            <a class="navbar-item">
+                                Jobs
+                            </a>
+                            <a class="navbar-item">
+                                Contact
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Report an issue
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-primary">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light">
+                                Log in
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
         <div class="hero-body">
             <div class="container">
                 <div class="columns is-centered">
                     <div class="column is-5-tablet is-4-desktop is-3-widescreen">
                         <form action="#" class="box" method="post" enctype="multipart/form-data" name="registration">
-                            
+
                             <div class="field">
                                 <label class="label">Email</label>
                                 <div class="city">
-                                    <input type="email" id="email" placeholder="nome.cognome@buonarroti.tn.it" pattern="[a-z0-9]*(?=.)[a-z0-9]*+@buonarroti\.tn\.it" size="30" class="input" required>
+                                    <input type="email" id="email" placeholder="nome.cognome@buonarroti.tn.it" pattern="[a-z][a-z0-9]\*[a-z][a-z0-9]*+@buonarroti\.tn\.it" size="30" class="input" required>
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-envelope"></i>
                                     </span>
@@ -101,7 +164,7 @@
                                 </label>
                             </div>
                             <div class="field">
-                                <button class="button is-success" onclick="validatePassword()">
+                                <button class="button is-success" onclick="">
                                     Login
                                 </button>
                             </div>
@@ -110,43 +173,41 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+
+            function register() {
+                if (validateDate() && validatePassword())
+                    alert("Registrazione avvenuta con successo");
+            }
+            function validatePassword() {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+                var regularExpression = /^[a-zA-Z0-9!@#$%^&*]{8,30}$/;
+                var check = true;
+                if (password.length < 8) {
+                    password.setCustomValidity("La password deve essere lunga almeno 8 caratteri");
+                    return false;
+                }
+                if (!regularExpression.test(password)) {
+                    password.setCustomValidity("La password deve contenere almeno un carattero minuscolo, uno maiuscolo e un numero");
+                    return false;
+                }
+                if (password !== confirmPassword) {
+                    password.setCustomValidity("La password non corrisponde");
+                    return false;
+                }
+
+                return check;
+            }
+
+            function validateDate() {
+                var dateOfBirth = document.getElementById("dataNascita").value;
+            }
+        </script>
     </body>
-
-
-    <script type="text/javascript">
-
-        function register() {
-            if (validateDate() && validatePassword())
-                alert("Registrazione avvenuta con successo");
-        }
-        function validatePassword() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-            var regularExpression = /^[a-zA-Z0-9!@#$%^&*]{8,30}$/;
-            var check = true;
-            if (password.length < 8) {
-                alert("La password deve essere lunga almeno 8 caratteri");
-                return false;
-            }
-            if (!regularExpression.test(password)) {
-                alert("La password deve contenere almeno un carattero minuscolo, uno maiuscolo, un numero e un carattere speciale");
-                return false;
-            }
-            if (password !== confirmPassword) {
-                alert("La password non corrisponde");
-                return false;
-            }
-            
-            return check;
-        }
-
-        function validateDate() {
-            var dateOfBirth = document.getElementById("dataNascita").value;
-        }
-    </script>
-    <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
 </html>
 
+<!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
 <!--
  function Validate() {
             var password = document.getElementById("password").value;

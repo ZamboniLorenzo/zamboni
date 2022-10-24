@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+
+    <title>Impiccato </title>
+    <meta http-equiv="Content-Language" content="it" />
+    <link rel="stylesheet" href="../bulma/css/bulma.min.css">
+
+    <script type="text/javascript">
+
+        var can_play = true;
+        var words = new Array("INFORMATICA", "HTML", "CSS", "JAVASCRIPT", "DIZIONARIO");
+
+        var to_guess = "";
+        var display_word = "";
+        var used_letters = "";
+        var wrong_guesses = 0;
+
+        function selectLetter(lett)
+        {
+            if (can_play === false)
+            {
+                return;
+            }
+
+            if (used_letters.indexOf(lett) !== -1)
+            {
+                return;
+            }
+
+            used_letters += lett;
+            document.game.usedLetters.value = used_letters;
+
+            if (to_guess.indexOf(lett) !== -1)
+            {
+                // correct letter guess
+                pos = 0;
+                temp_mask = display_word;
+
+                while (to_guess.indexOf(lett, pos) !== -1)
+                {
+                    pos = to_guess.indexOf(lett, pos);
+                    end = pos + 1;
+
+                    start_text = temp_mask.substring(0, pos);
+                    end_text = temp_mask.substring(end, temp_mask.length);
+
+                    temp_mask = start_text + lett + end_text;
+                    pos = end;
+                }
+
+                display_word = temp_mask;
+                document.game.displayWord.value = display_word;
+
+                if (display_word.indexOf("*") === -1)
+                {
+                    // won
+                    alert("Hai vinto!");
+                    can_play = false;
+                }
+            } else
+            {
+                // incorrect letter guess
+                wrong_guesses += 1;
+                eval("document.hm.src=\"hm" + wrong_guesses + ".gif\"");
+
+                if (wrong_guesses === 10)
+                {
+                    // lost
+                    alert("Hai perso!");
+                    can_play = false;
+                }
+            }
+        }
+
+        function reset()
+        {
+            selectWord();
+            document.game.usedLetters.value = "";
+            used_letters = "";
+            wrong_guesses = 0;
+            document.hm.src = "hmstart.gif";
+        }
+
+        function selectWord()
+        {
+            can_play = true;
+            random_number = Math.round(Math.random() * (words.length - 1));
+            to_guess = words[random_number];
+            //document.game.theWord.value = to_guess;
+
+            // display masked word
+            masked_word = createMask(to_guess);
+            document.game.displayWord.value = masked_word;
+            display_word = masked_word;
+        }
+
+        function createMask(m)
+        {
+            mask = "";
+            word_lenght = m.length;
+
+            for (i = 0; i < word_lenght; i++)
+            {
+                mask = mask + "*";
+            }
+            return mask;
+        }
+
+    </script>
+
+</head>
+<body onLoad="reset();
+        return true;">
+    <br><br>
+    <p style="font-size: 40px; font-family: Georgia" align="center" >
+        Gioco dell'impiccato
+    </p>
+    <br><br>
+    <div align="center">
+        <form name="game">
+            <p>Parola: <input type="text" name="displayWord"></p>
+            <p>Lettere utilizzate: <input type="text" name="usedLetters"></p>
+        </form>
+
+        <p><a href="javascript:selectLetter('A');">A</a> | 
+            <a href="javascript:selectLetter('B');">B</a> | 
+            <a href="javascript:selectLetter('C');">C</a> | 
+            <a href="javascript:selectLetter('D');">D</a> | 
+            <a href="javascript:selectLetter('E');">E</a> | 
+            <a href="javascript:selectLetter('F');">F</a> | 
+            <a href="javascript:selectLetter('G');">G</a> | 
+            <a href="javascript:selectLetter('H');">H</a> | 
+            <a href="javascript:selectLetter('I');">I</a> | 
+            <a href="javascript:selectLetter('J');">J</a> | 
+            <a href="javascript:selectLetter('K');">K</a> | 
+            <a href="javascript:selectLetter('L');">L</a>
+            <a href="javascript:selectLetter('M');">M</a><br>
+            <a href="javascript:selectLetter('N');">N</a> | 
+            <a href="javascript:selectLetter('O');">O</a> | 
+            <a href="javascript:selectLetter('P');">P</a> | 
+            <a href="javascript:selectLetter('Q');">Q</a> | 
+            <a href="javascript:selectLetter('R');">R</a> | 
+            <a href="javascript:selectLetter('S');">S</a> | 
+            <a href="javascript:selectLetter('T');">T</a> | 
+            <a href="javascript:selectLetter('U');">U</a> | 
+            <a href="javascript:selectLetter('V');">V</a> | 
+            <a href="javascript:selectLetter('W');">W</a> | 
+            <a href="javascript:selectLetter('X');">X</a> | 
+            <a href="javascript:selectLetter('Y');">Y</a> | 
+            <a href="javascript:selectLetter('Z');">Z</a></p>
+
+        <p><img src="hmstart.gif" height="250" width="150" name="hm"></p>
+
+        <a class="btn btn-primary" href="javascript:reset()" role="button">Ricomincia</a>
+
+
+    </div>
+
+</body>
+</html>
