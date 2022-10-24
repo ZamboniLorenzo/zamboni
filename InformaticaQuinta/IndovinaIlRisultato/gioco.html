@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Awesome website</title>
+
+        <link href="../bootstrap_CSS-JS/css/bootstrap.min.css" rel="stylesheet">
+        <!--<script src="funzioniGioco.js"></script>-->
+        
+    </head>
+    
+    <body>
+        
+        <!-- NAVBAR -->
+        <nav class="navbar" style="background-color: cornflowerblue;">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">Home</a>
+            </div>
+        </nav>
+        
+        <div style="text-align: center; margin: 5%">
+            <button type="button" class="btn btn-outline-primary" onclick="randomNum1()" style="margin-left: 1%;">
+                Inizia Gioco
+            </button>
+        </div>
+        
+        <div style="text-align: center; margin: 5%">
+            <input type="text" placeholder="?" id="num1" style="width: 50px; text-align: center;">
+            <input type="text" placeholder="?" id="operator" style="width: 50px; text-align: center;">
+            <input type="text" placeholder="?" id="num2" style="width: 50px; text-align: center;">
+            <span style="font-size: 25px;">
+                =
+            </span>
+        </div>
+        
+        <div style="text-align: center;">
+            <input type="number" placeholder="Inserisci il risultato" id="result" style="text-align: center;">
+            <button type="button" class="btn btn-outline-primary" onclick="win()" style="margin-left: 1%;">
+              Conferma
+            </button>
+        </div>
+        
+        <script>
+            var num1;
+            var num2;
+            var numOperator;
+
+            function init(){
+                randomNum1();
+                randomNum2();
+                randomOperator(4);
+            }
+
+            function randomNum1(){
+                num1 = Math.floor(Math.random() * 10)+1;
+                document.getElementById("num1").value = num1;
+            }
+
+            function randomNum2(){
+                num2 = Math.floor(Math.random() * 10)+1;
+                document.getElementById("num2").value = num2;
+            }
+
+            function randomOperator(numOfOperators){
+                var operator;
+                numOperator = Math.floor(Math.random() * numOfOperators)+1;
+                switch(numOperator){
+                    case 1:
+                        operator = "+";
+                        break;
+                    case 2:
+                        operator = "-";
+                        break;
+                    case 3:
+                        operator = "*";
+                        break;
+                    case 4:
+                        operator = "/";
+                        break;
+                }
+
+                document.getElementById("operator").value = operator;
+            }
+
+            function isCorrect(){
+                var result;
+
+                switch(numOperator){
+                    case 1:
+                        result = num1+num2;
+                        break;
+                    case 2:
+                        result = num1-num2;;
+                        break;
+                    case 3:
+                        result = num1*num2;;
+                        break;
+                    case 4:
+                        result = num1/num2;;
+                        break;
+                }
+
+                if(document.getElementById("result")).value === result){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+            function win(){
+                if(isCorrect()){
+                    window.alert("Corretto!!!");
+                }
+                else{
+                    window.alert("Hai sbagliato :(");
+                }
+            }
+        </script>
+    </body>
+    
+</html>

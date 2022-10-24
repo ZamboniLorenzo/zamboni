@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head title="MathGuesser">
-       <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bulma/css/bulma.min.css">
+        <link rel="stylesheet" href="../../bulma/css/bulma-rtl.min.css" type="text/css"/>
+
     </head>
     <body>
 
@@ -67,19 +69,65 @@
             </div>
         </nav>
 
+
+
         <div style="text-align: center; margin: 5%">
-            <input type="text" class="input" placeholder="?" id="num1" style="width: 50px; text-align: center;">
-            <input type="text" class="input" placeholder="?" id="operator" style="width: 50px; text-align: center;">
-            <input type="text" class="input" placeholder="?" id="num2" style="width: 50px; text-align: center;">
+            <button type="button" class="btn btn-outline-primary" onclick="" style="margin-left: 1%;">
+                Inizia Gioco
+            </button>
+        </div>
+
+        <div style="text-align: center; margin: 5%">
+            <input type="text" placeholder="?" id="num1" style="width: 50px; text-align: center;">
+            <input type="text" placeholder="?" id="operator" style="width: 50px; text-align: center;">
+            <input type="text" placeholder="?" id="num2" style="width: 50px; text-align: center;">
             <span style="font-size: 25px;">
                 =
             </span>
         </div>
 
-        <div class="field" style="text-align: center;">
-            <input type="number" class="input" placeholder="Inserisci il risultato" id="result" style="text-align: center;">
+        <div style="text-align: center;">
+            <input type="number" placeholder="Inserisci il risultato" id="result" style="text-align: center;">
+            <button type="button" class="button is-success" onclick="randomNum1()" style="margin-left: 1%;">
+                Conferma
+            </button>
         </div>
 
+        <script>
+            function start() {
+                randomNum1();
+                randomNum2();
+                randomOperator(4);
+            }
+
+            function randomNum1() {
+                document.getElementById("num1").placeholder = 1;
+            }
+
+            function randomNum2() {
+                document.getElementById("num2").value = Math.floor(Math.random() * 10) + 1;
+            }
+
+            function randomOperator(numOperator) {
+                var operator = "rip";
+                switch ((Math.floor(Math.random() * numOperator)) + 1) {
+                    case 1:
+                        operator = "+";
+                        break;
+                    case 2:
+                        operator = "-";
+                        break;
+                    case 3:
+                        operator = "*";
+                        break;
+                    case 4:
+                        operator = "/";
+                        break;
+                }
+
+                document.getElementById("operator").value = operator;
+            }
+        </script>
     </body>
 
 </html>
